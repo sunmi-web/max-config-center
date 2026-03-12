@@ -31,7 +31,7 @@ ConfigCenter.get('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE')
 
 ## 模块
 
-- 系统配置 SYSTEM
+- 系统配置 SYS
 - 点餐 CHECKOUT
 - 结算 SETTLEMENT
 - 叫号 CALL
