@@ -53,6 +53,147 @@ ConfigCenter.get('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE')
 - 账号 ACCOUNT
 - 国际化 I18N
 
+## 配置一览
+
+| 功能键                                                | 备注 | 台式 | 手持 | 自助 | Web后台 | 扫码点餐 | 管家App |
+| ----------------------------------------------------- | ---- | ---- | ---- | ---- | ------- | -------- | ------- |
+| SYS.APP_LOGO                                          |      | √    | √    | √    | √       | √        | √       |
+| SYS.APP_LOGO_DARK                                     |      | √    | √    | √    |         |          |         |
+| SYS.THEME                                             |      | √    | √    | √    |         |          |         |
+| SYS.DECIMAL_PLACES                                    |      | √    |      |      | √       |          |         |
+| SYS.EMAIL_REGEX                                       |      |      |      |      | √       |          |         |
+| SYS.LOCALE_LANGUAGE_MAP                               |      | √    | √    |      | √       | √        | √       |
+| SYS.CELLPHONE_VALIDATOR                               |      | √    | √    |      |         |          |         |
+| SYS.TELEPHONE_VALIDATOR                               |      | √    | √    |      |         |          |         |
+| SYS.MAX_AMOUNT_TIER_1                                 |      | √    | √    |      | √       |          | √       |
+| SYS.MAX_AMOUNT_TIER_2                                 |      | √    |      |      | √       |          |         |
+| SYS.MAX_AMOUNT_TIER_3                                 |      |      |      |      | √       |          | √       |
+| SYS.WATER_DROP_OFFSET                                 |      |      | √    | √    |         |          |         |
+| SYS.CALCULATOR_VERSION                                |      |      |      |      |         | √        |         |
+| SYS.CURRENT_LANGUAGE                                  |      |      |      |      |         | √        |         |
+| SYS.FUN_FEE                                           |      |      |      |      |         | √        |         |
+| SYS.FUN_GOOD_DISCOUNT                                 |      |      |      |      |         | √        |         |
+| SYS.FUN_SHARING_TABLE                                 |      |      |      |      |         | √        |         |
+| SYS.FUN_TAX                                           |      |      |      |      |         | √        |         |
+| SYS.FUN_ACTIVITIES                                    |      |      |      |      |         |          |         |
+| SYS.FUN_CALLING_SERVICE                               |      |      |      |      |         |          |         |
+| SYS.FUN_ONLINE_PAY                                    |      |      |      |      |         |          |         |
+| SYS.RANKING_TOP3_ICONS                                |      |      |      |      |         |          | √       |
+| SYS.TAB_BARS                                          |      |      |      |      |         |          | √       |
+| SYS.MAX_STOCK_AMOUNT                                  |      |      |      |      |         |          | √       |
+| SYS.MAX_STOCK_WEIGHT                                  |      |      |      |      |         |          | √       |
+| I18N.FORMAT_DATE                                      |      | √    | √    | √    | √       |          |         |
+| I18N.FORMAT_DATE_SHORT                                |      | √    | √    | √    | √       |          |         |
+| I18N.FORMAT_DATE_TIME                                 |      | √    | √    | √    | √       |          |         |
+| I18N.FORMAT_DATE_TIME_SHORT                           |      | √    | √    | √    | √       |          |         |
+| I18N.FORMAT_TIME                                      |      | √    | √    | √    | √       |          |         |
+| I18N.FORMAT_TIME_SHORT                                |      | √    | √    | √    | √       |          |         |
+| I18N.FORMAT_DATE_SHORT_TIME_SHORT                     |      | √    | √    | √    | √       |          |         |
+| STORE.STORE_AVATAR_BASE64                             |      | √    | √    | √    |         |          |         |
+| STORE.STORE_AVATAR                                    |      |      |      |      |         |          |         |
+| STORE.STORE_LOGIN_AD_IMG                              |      | √    |      |      | √       |          |         |
+| STORE.APP_NAME                                        |      | √    | √    |      |         |          |         |
+| STORE.APP_ONLINE_PAYMENT                              |      | √    | √    |      |         |          |         |
+| STORE.DEFAULT_BACKGROUND                              |      |      |      |      |         | √        |         |
+| STORE.STORE_BUSINESS_TYPE_REQUIRED                    |      |      |      |      |         |          |         |
+| STORE.STORE_CASCADE_ADDRESS_ENABLE                    |      |      |      |      |         |          |         |
+| STORE.STORE_CASCADE_ADDRESS_REQUIRED                  |      |      |      |      |         |          |         |
+| STORE.STORE_QR_ORDER_ENABLE                           |      |      |      |      |         |          |         |
+| STORE.STORE_QR_ORDER_AUTO_ACCEPT_ENABLE               |      |      |      |      |         |          |         |
+| STORE.STORE_SUBSCREEN_AD_IMG                          |      |      |      |      |         |          |         |
+| STORE.STORE_SUBSCREEN_PAY_AD_IMG                      |      |      |      |      |         |          |         |
+| STORE.D3MINI_SUBSCREEN_PAY_AD_IMG                     |      |      |      |      |         |          |         |
+| STORE.D_STORE_ORDER_AUTO_ACCEPT_ENABLE                |      |      |      |      |         |          |         |
+| STORE.D_STORE_QR_ORDER_ENABLE                         |      |      |      |      |         |          |         |
+| CHECKOUT.AD_SELF_DINING_METHOD                        |      |      |      | √    |         |          |         |
+| CHECKOUT.AD_SELF_PAYMENT_METHOD                       |      |      |      | √    |         |          |         |
+| CHECKOUT.AD_SELF_PLAY_SWITCH                          |      |      |      | √    |         |          |         |
+| CHECKOUT.AD_SELF_PLAY_TYPE                            |      |      |      | √    |         |          |         |
+| CHECKOUT.AD_SELF_SECONDARY                            |      |      |      | √    |         |          |         |
+| CHECKOUT.BUSINESS_TYPE                                |      | √    | √    | √    | √       |          |         |
+| CHECKOUT.UI_CATEGORY_COUNT_SHOW                       |      |      |      | √    |         |          |         |
+| CHECKOUT.UI_LAYOUT_TYPE                               |      | √    | √    | √    |         |          |         |
+| CHECKOUT.POS_QR_ORDER_ENABLE                          |      | √    | √    |      |         |          |         |
+| CHECKOUT.POS_QR_ORDER_AUTO_ACCEPT_ENABLE              |      | √    | √    |      |         |          |         |
+| CHECKOUT.POS_SCAN_ORDER_ENABLE                        |      |      |      |      |         |          |         |
+| CHECKOUT.POS_MENU_MONEY_REGULAR                       |      |      |      |      |         |          |         |
+| CHECKOUT.CUSTOM_PRICE_SUPPORT                         |      |      |      |      |         |          |         |
+| CHECKOUT.TEMPORARY_GOODS_SUPPORT                      |      |      |      |      |         |          |         |
+| CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE               |      |      |      |      |         |          |         |
+| CHECKOUT.LOW_INVENTORY_WARNING_ENABLE                 |      |      |      |      |         |          |         |
+| CHECKOUT.SPLIT_ORDER_ENABLE                           |      | √    | √    |      |         |          |         |
+| CHECKOUT.SETTLEMENT_AUTO_PRINT_BILL_TICKET_ENABLE     |      |      |      |      |         |          |         |
+| CHECKOUT.SETTLEMENT_CASH_AMOUNT_COVERAGE_ENABLE       |      |      |      |      |         |          |         |
+| CHECKOUT.SETTLEMENT_MANUAL_PRINT_MAKING_TICKET_ENABLE |      |      |      |      |         |          |         |
+| CHECKOUT.SETTLEMENT_SPLIT_PAY_ENABLE                  |      |      |      |      |         |          |         |
+| CHECKOUT.SECONDARY_SCREEN_AD_ENABLE                   |      |      |      |      |         |          |         |
+| CHECKOUT.DELIVERY_CHANNEL_MONEY_REGULAR               |      |      |      |      |         |          |         |
+| CHECKOUT.PRE_PRINT_NO_REFUND_CAT_ENABLE               |      |      |      |      |         |          |         |
+| GOOD.ITEM_BG_MAP                                      |      | √    |      | √    |         |          |         |
+| GOOD.ITEM_COLOR_MAP                                   |      | √    |      |      |         |          |         |
+| GOOD.ITEM_SHAPE_MAP                                   |      | √    |      |      |         |          |         |
+| GOOD.MAX_AMOUNT_TIER_1                                |      | √    |      |      | √       |          |         |
+| GOOD.MAX_AMOUNT_TIER_2                                |      | √    |      |      | √       |          |         |
+| GOOD.MAX_AMOUNT_TIER_3                                |      |      |      |      | √       |          |         |
+| GOOD.EXTERNAL_CHANNEL_MENU_ENABLE                     |      |      |      |      |         |          |         |
+| IOT.LABEL_PRINTER_PAPER_SIZE                          |      | √    | √    |      |         |          |         |
+| IOT.SUPPORT_PRINTER_MODEL                             |      | √    | √    |      |         |          |         |
+| MEMBER.MEMBER_ENABLE                                  |      | √    | √    | √    |         |          |         |
+| MEMBER.MEMBER_PHONE_PREFIX                            |      |      |      | √    |         |          |         |
+| MEMBER.MEMBER_DEPOSIT_OFFLINE_SUPPORT                 |      |      |      |      |         |          |         |
+| MEMBER.MEMBER_DEPOSIT_SUPPORT                         |      |      |      |      |         |          |         |
+| MEMBER.MEMBER_PROMOTION_SUPPORT                       |      |      |      |      |         |          |         |
+| PAYMENT.ECR_PAY_MERCHANT_ID                           |      |      |      | √    |         |          |         |
+| PAYMENT.PAY_METHOD_RANDOM_ICON                        |      |      |      |      |         |          |         |
+| PAYMENT.ONLINEPAYMETHOD_NAMES                         |      |      |      | √    |         |          |         |
+| PAYMENT.ONLINEPAY_ICON_MAP                            |      |      |      | √    |         |          |         |
+| PAYMENT.ONLINE_PAYMENT_TYPE                           |      | √    |      |      |         |          |         |
+| PAYMENT.PAY_ECR_CONFIG                                |      |      |      | √    |         |          |         |
+| PAYMENT.PAY_ECR_CONFIG_IP                             |      |      |      | √    |         |          |         |
+| PAYMENT.PAY_ECR_CONFIG_PORT                           |      |      |      | √    |         |          |         |
+| PAYMENT.PAY_METHOD_LIST                               |      | √    | √    | √    |         |          |         |
+| PAYMENT.ROUNDING_PARAM_CONFIG                         |      |      |      | √    |         |          |         |
+| PAYMENT.ROUNDING_RULES                                |      | √    | √    | √    | √       |          |         |
+| PAYMENT.ROUNDING_RULE_DESC                            |      | √    | √    | √    | √       |          |         |
+| PAYMENT.RoundingRuleType                              |      | √    | √    | √    | √       |          |         |
+| PAYMENT.TIP_ENABLE                                    |      | √    | √    |      |         |          |         |
+| PAYMENT.TIP_SHORTCUT_INFO                             |      | √    | √    |      |         |          |         |
+| PICKUP.MAX_SERIAL_NUMBER                              |      | √    | √    |      |         |          |         |
+| PICKUP.MIN_SERIAL_NUMBER                              |      | √    | √    |      |         |          |         |
+| PICKUP.PICKUP_ENABLE                                  |      |      |      |      |         |          |         |
+| TAKEOUT.TAKEOUT_ENABLE                                |      | √    | √    |      | √       |          | √       |
+| TAKEOUT.AUTO_MEALDELIVERY_ENABLE                      |      |      |      |      |         |          |         |
+| QUEUE.QUEUE_ENABLE                                    |      |      |      |      |         |          |         |
+| QUEUE.QUEUE_TABLE_LIST                                |      |      |      |      |         |          |         |
+| CALL.NUMBER_CALLING_ORDERCHANNELS                     |      |      |      |      |         |          |         |
+| TAX.TAXATION_MODE                                     |      | √    | √    | √    |         | √        |         |
+| TAX.FEE_LIST                                          |      | √    |      |      |         |          |         |
+| TAX.MENU_FEE_LIST                                     |      | √    | √    |      |         |          |         |
+| TAX.MENU_TAX_LIST                                     |      | √    | √    |      |         |          |         |
+| TAX.CURRENT_LANGUAGE                                  |      |      |      |      |         | √        |         |
+| TAX.TAXATION_MODE                                     |      | √    | √    | √    |         | √        |         |
+| TAX.TAX_TAG                                           |      | √    | √    |      |         |          |         |
+| TAX.TAX_ENABLE                                        |      |      |      |      |         |          |         |
+| TAX.TAX_LIST                                          |      |      |      |      |         |          |         |
+| TAX.PRODUCT_PRICE_INCLUDE_TAX_ENABLE                  |      |      |      |      |         |          |         |
+| VOICE.AIVOICE_DEFAULT_LANG                            |      | √    | √    | √    |         |          |         |
+| VOICE.AIVOICE_DEFAULT_LANG_EFFECT_AUTOLY              |      | √    | √    | √    |         |          |         |
+| VOICE.CHANNEL_SCAN_ORDER_ENABLE                       |      |      |      | √    |         |          |         |
+| VOICE.CUSTOM_VOICE_ASSETS                             |      | √    | √    | √    |         |          |         |
+| VOICE.KIOSK_ORDER_ENABLE                              |      | √    |      |      |         |          |         |
+| VOICE.REMEDY_VOICE_ASSETS                             |      | √    | √    | √    |         |          |         |
+| VOICE.SCAN_ORDER_BEEP_ENABLE                          |      | √    | √    | √    |         |          |         |
+| VOICE.SCAN_ORDER_ENABLE                               |      | √    | √    | √    |         |          |         |
+| VOICE.SCAN_ORDER_TEXT_ENABLE                          |      | √    | √    | √    |         |          |         |
+| VOICE.SCAN_PAYMENT_BEEP_ENABLE                        |      |      |      | √    |         |          |         |
+| VOICE.SCAN_PAYMENT_ENABLE                             |      | √    | √    | √    |         |          |         |
+| VOICE.SCAN_PAYMENT_TEXT_ENABLE                        |      |      |      | √    |         |          |         |
+| VOICE.TACKOUT_ORDER_BEEP_ENABLE                       |      |      |      | √    |         |          |         |
+| VOICE.TACKOUT_ORDER_ENABLE                            |      | √    | √    | √    |         |          |         |
+| VOICE.TACKOUT_ORDER_TEXT_ENABLE                       |      |      |      | √    |         |          |         |
+
+
+
 ## 功能清单
 
 > [全部功能清单AI表格，](https://alidocs.dingtalk.com/i/nodes/EpGBa2Lm8azoq94yCD3A96xlWgN7R35y?iframeQuery=entrance%3Ddata%26sheetId%3DhERWDMS%26viewId%3DqvGDAH2) 表格 ID：`EpGBa2Lm8azoq94yCD3A96xlWgN7R35y`
@@ -72,141 +213,3 @@ ConfigCenter.get('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE')
 | 备注     | 文本 | 说明或未使用等                                                                                     |
 |          | 人员 | 钉钉用户                                                                                           |
 
----
-
-| 功能键                                                | 自助 | Web后台 | 台式 | 手持 | 扫码点餐 | 管家App |
-| ----------------------------------------------------- | ---- | ------- | ---- | ---- | -------- | ------- |
-| SYS.APP_LOGO                                          | √    | √       | √    | √    | √        | √       |
-| SYS.APP_LOGO_DARK                                     | √    |         | √    | √    |          |         |
-| SYS.THEME                                             | √    |         | √    | √    |          |         |
-| SYS.DECIMAL_PLACES                                    |      | √       | √    |      |          |         |
-| SYS.EMAIL_REGEX                                       |      | √       |      |      |          |         |
-| SYS.LOCALE_LANGUAGE_MAP                               |      | √       | √    | √    | √        | √       |
-| SYS.CELLPHONE_VALIDATOR                               |      |         | √    | √    |          |         |
-| SYS.TELEPHONE_VALIDATOR                               |      |         | √    | √    |          |         |
-| SYS.MAX_AMOUNT_TIER_1                                 |      | √       | √    | √    |          | √       |
-| SYS.MAX_AMOUNT_TIER_2                                 |      | √       | √    |      |          |         |
-| SYS.MAX_AMOUNT_TIER_3                                 |      | √       |      |      |          | √       |
-| SYS.WATER_DROP_OFFSET                                 | √    |         |      | √    |          |         |
-| SYS.CALCULATOR_VERSION                                |      |         |      |      | √        |         |
-| SYS.CURRENT_LANGUAGE                                  |      |         |      |      | √        |         |
-| SYS.FUN_FEE                                           |      |         |      |      | √        |         |
-| SYS.FUN_GOOD_DISCOUNT                                 |      |         |      |      | √        |         |
-| SYS.FUN_SHARING_TABLE                                 |      |         |      |      | √        |         |
-| SYS.FUN_TAX                                           |      |         |      |      | √        |         |
-| SYS.FUN_ACTIVITIES                                    |      |         |      |      |          |         |
-| SYS.FUN_CALLING_SERVICE                               |      |         |      |      |          |         |
-| SYS.FUN_ONLINE_PAY                                    |      |         |      |      |          |         |
-| SYS.RANKING_TOP3_ICONS                                |      |         |      |      |          | √       |
-| SYS.TAB_BARS                                          |      |         |      |      |          | √       |
-| SYS.MAX_STOCK_AMOUNT                                  |      |         |      |      |          | √       |
-| SYS.MAX_STOCK_WEIGHT                                  |      |         |      |      |          | √       |
-| I18N.FORMAT_DATE                                      | √    | √       | √    | √    |          |         |
-| I18N.FORMAT_DATE_SHORT                                | √    | √       | √    | √    |          |         |
-| I18N.FORMAT_DATE_TIME                                 | √    | √       | √    | √    |          |         |
-| I18N.FORMAT_DATE_TIME_SHORT                           | √    | √       | √    | √    |          |         |
-| I18N.FORMAT_TIME                                      | √    | √       | √    | √    |          |         |
-| I18N.FORMAT_TIME_SHORT                                | √    | √       | √    | √    |          |         |
-| I18N.FORMAT_DATE_SHORT_TIME_SHORT                     | √    | √       | √    | √    |          |         |
-| STORE.STORE_AVATAR_BASE64                             | √    |         | √    | √    |          |         |
-| STORE.STORE_AVATAR                                    |      |         |      |      |          |         |
-| STORE.STORE_LOGIN_AD_IMG                              |      | √       | √    |      |          |         |
-| STORE.APP_NAME                                        |      |         | √    | √    |          |         |
-| STORE.APP_ONLINE_PAYMENT                              |      |         | √    | √    |          |         |
-| STORE.DEFAULT_BACKGROUND                              |      |         |      |      | √        |         |
-| STORE.STORE_BUSINESS_TYPE_REQUIRED                    |      |         |      |      |          |         |
-| STORE.STORE_CASCADE_ADDRESS_ENABLE                    |      |         |      |      |          |         |
-| STORE.STORE_CASCADE_ADDRESS_REQUIRED                  |      |         |      |      |          |         |
-| STORE.STORE_QR_ORDER_ENABLE                           |      |         |      |      |          |         |
-| STORE.STORE_QR_ORDER_AUTO_ACCEPT_ENABLE               |      |         |      |      |          |         |
-| STORE.STORE_SUBSCREEN_AD_IMG                          |      |         |      |      |          |         |
-| STORE.STORE_SUBSCREEN_PAY_AD_IMG                      |      |         |      |      |          |         |
-| STORE.D3MINI_SUBSCREEN_PAY_AD_IMG                     |      |         |      |      |          |         |
-| STORE.D_STORE_ORDER_AUTO_ACCEPT_ENABLE                |      |         |      |      |          |         |
-| STORE.D_STORE_QR_ORDER_ENABLE                         |      |         |      |      |          |         |
-| CHECKOUT.AD_SELF_DINING_METHOD                        | √    |         |      |      |          |         |
-| CHECKOUT.AD_SELF_PAYMENT_METHOD                       | √    |         |      |      |          |         |
-| CHECKOUT.AD_SELF_PLAY_SWITCH                          | √    |         |      |      |          |         |
-| CHECKOUT.AD_SELF_PLAY_TYPE                            | √    |         |      |      |          |         |
-| CHECKOUT.AD_SELF_SECONDARY                            | √    |         |      |      |          |         |
-| CHECKOUT.BUSINESS_TYPE                                | √    | √       | √    | √    |          |         |
-| CHECKOUT.UI_CATEGORY_COUNT_SHOW                       | √    |         |      |      |          |         |
-| CHECKOUT.UI_LAYOUT_TYPE                               | √    |         | √    | √    |          |         |
-| CHECKOUT.POS_QR_ORDER_ENABLE                          |      |         | √    | √    |          |         |
-| CHECKOUT.POS_QR_ORDER_AUTO_ACCEPT_ENABLE              |      |         | √    | √    |          |         |
-| CHECKOUT.POS_SCAN_ORDER_ENABLE                        |      |         |      |      |          |         |
-| CHECKOUT.POS_MENU_MONEY_REGULAR                       |      |         |      |      |          |         |
-| CHECKOUT.CUSTOM_PRICE_SUPPORT                         |      |         |      |      |          |         |
-| CHECKOUT.TEMPORARY_GOODS_SUPPORT                      |      |         |      |      |          |         |
-| CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE               |      |         |      |      |          |         |
-| CHECKOUT.LOW_INVENTORY_WARNING_ENABLE                 |      |         |      |      |          |         |
-| CHECKOUT.SPLIT_ORDER_ENABLE                           |      |         | √    | √    |          |         |
-| CHECKOUT.SETTLEMENT_AUTO_PRINT_BILL_TICKET_ENABLE     |      |         |      |      |          |         |
-| CHECKOUT.SETTLEMENT_CASH_AMOUNT_COVERAGE_ENABLE       |      |         |      |      |          |         |
-| CHECKOUT.SETTLEMENT_MANUAL_PRINT_MAKING_TICKET_ENABLE |      |         |      |      |          |         |
-| CHECKOUT.SETTLEMENT_SPLIT_PAY_ENABLE                  |      |         |      |      |          |         |
-| CHECKOUT.SECONDARY_SCREEN_AD_ENABLE                   |      |         |      |      |          |         |
-| CHECKOUT.DELIVERY_CHANNEL_MONEY_REGULAR               |      |         |      |      |          |         |
-| CHECKOUT.PRE_PRINT_NO_REFUND_CAT_ENABLE               |      |         |      |      |          |         |
-| GOOD.ITEM_BG_MAP                                      | √    |         | √    |      |          |         |
-| GOOD.ITEM_COLOR_MAP                                   |      |         | √    |      |          |         |
-| GOOD.ITEM_SHAPE_MAP                                   |      |         | √    |      |          |         |
-| GOOD.MAX_AMOUNT_TIER_1                                |      | √       | √    |      |          |         |
-| GOOD.MAX_AMOUNT_TIER_2                                |      | √       | √    |      |          |         |
-| GOOD.MAX_AMOUNT_TIER_3                                |      | √       |      |      |          |         |
-| GOOD.EXTERNAL_CHANNEL_MENU_ENABLE                     |      |         |      |      |          |         |
-| IOT.LABEL_PRINTER_PAPER_SIZE                          |      |         | √    | √    |          |         |
-| IOT.SUPPORT_PRINTER_MODEL                             |      |         | √    | √    |          |         |
-| MEMBER.MEMBER_ENABLE                                  | √    |         | √    | √    |          |         |
-| MEMBER.MEMBER_PHONE_PREFIX                            | √    |         |      |      |          |         |
-| MEMBER.MEMBER_DEPOSIT_OFFLINE_SUPPORT                 |      |         |      |      |          |         |
-| MEMBER.MEMBER_DEPOSIT_SUPPORT                         |      |         |      |      |          |         |
-| MEMBER.MEMBER_PROMOTION_SUPPORT                       |      |         |      |      |          |         |
-| PAYMENT.ECR_PAY_MERCHANT_ID                           | √    |         |      |      |          |         |
-| PAYMENT.PAY_METHOD_RANDOM_ICON                        |      |         |      |      |          |         |
-| PAYMENT.ONLINEPAYMETHOD_NAMES                         | √    |         |      |      |          |         |
-| PAYMENT.ONLINEPAY_ICON_MAP                            | √    |         |      |      |          |         |
-| PAYMENT.ONLINE_PAYMENT_TYPE                           |      |         | √    |      |          |         |
-| PAYMENT.PAY_ECR_CONFIG                                | √    |         |      |      |          |         |
-| PAYMENT.PAY_ECR_CONFIG_IP                             | √    |         |      |      |          |         |
-| PAYMENT.PAY_ECR_CONFIG_PORT                           | √    |         |      |      |          |         |
-| PAYMENT.PAY_METHOD_LIST                               | √    |         | √    | √    |          |         |
-| PAYMENT.ROUNDING_PARAM_CONFIG                         | √    |         |      |      |          |         |
-| PAYMENT.ROUNDING_RULES                                | √    | √       | √    | √    |          |         |
-| PAYMENT.ROUNDING_RULE_DESC                            | √    | √       | √    | √    |          |         |
-| PAYMENT.RoundingRuleType                              | √    | √       | √    | √    |          |         |
-| PAYMENT.TIP_ENABLE                                    |      |         | √    | √    |          |         |
-| PAYMENT.TIP_SHORTCUT_INFO                             |      |         | √    | √    |          |         |
-| PICKUP.MAX_SERIAL_NUMBER                              |      |         | √    | √    |          |         |
-| PICKUP.MIN_SERIAL_NUMBER                              |      |         | √    | √    |          |         |
-| PICKUP.PICKUP_ENABLE                                  |      |         |      |      |          |         |
-| TAKEOUT.TAKEOUT_ENABLE                                |      | √       | √    | √    |          | √       |
-| TAKEOUT.AUTO_MEALDELIVERY_ENABLE                      |      |         |      |      |          |         |
-| QUEUE.QUEUE_ENABLE                                    |      |         |      |      |          |         |
-| QUEUE.QUEUE_TABLE_LIST                                |      |         |      |      |          |         |
-| CALL.NUMBER_CALLING_ORDERCHANNELS                     |      |         |      |      |          |         |
-| TAX.TAXATION_MODE                                     | √    |         | √    | √    | √        |         |
-| TAX.FEE_LIST                                          |      |         | √    |      |          |         |
-| TAX.MENU_FEE_LIST                                     |      |         | √    | √    |          |         |
-| TAX.MENU_TAX_LIST                                     |      |         | √    | √    |          |         |
-| TAX.CURRENT_LANGUAGE                                  |      |         |      |      | √        |         |
-| TAX.TAXATION_MODE                                     | √    |         | √    | √    | √        |         |
-| TAX.TAX_TAG                                           |      |         | √    | √    |          |         |
-| TAX.TAX_ENABLE                                        |      |         |      |      |          |         |
-| TAX.TAX_LIST                                          |      |         |      |      |          |         |
-| TAX.PRODUCT_PRICE_INCLUDE_TAX_ENABLE                  |      |         |      |      |          |         |
-| VOICE.AIVOICE_DEFAULT_LANG                            | √    |         | √    | √    |          |         |
-| VOICE.AIVOICE_DEFAULT_LANG_EFFECT_AUTOLY              | √    |         | √    | √    |          |         |
-| VOICE.CHANNEL_SCAN_ORDER_ENABLE                       | √    |         |      |      |          |         |
-| VOICE.CUSTOM_VOICE_ASSETS                             | √    |         | √    | √    |          |         |
-| VOICE.KIOSK_ORDER_ENABLE                              |      |         | √    |      |          |         |
-| VOICE.REMEDY_VOICE_ASSETS                             | √    |         | √    | √    |          |         |
-| VOICE.SCAN_ORDER_BEEP_ENABLE                          | √    |         | √    | √    |          |         |
-| VOICE.SCAN_ORDER_ENABLE                               | √    |         | √    | √    |          |         |
-| VOICE.SCAN_ORDER_TEXT_ENABLE                          | √    |         | √    | √    |          |         |
-| VOICE.SCAN_PAYMENT_BEEP_ENABLE                        | √    |         |      |      |          |         |
-| VOICE.SCAN_PAYMENT_ENABLE                             | √    |         | √    | √    |          |         |
-| VOICE.SCAN_PAYMENT_TEXT_ENABLE                        | √    |         |      |      |          |         |
-| VOICE.TACKOUT_ORDER_BEEP_ENABLE                       | √    |         |      |      |          |         |
-| VOICE.TACKOUT_ORDER_ENABLE                            | √    |         | √    | √    |          |         |
-| VOICE.TACKOUT_ORDER_TEXT_ENABLE                       | √    |         |      |      |          |         |
