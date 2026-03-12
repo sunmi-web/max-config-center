@@ -27,7 +27,6 @@
 
 ```javascript
 ConfigCenter.get('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE')
-ConfigCenter.set('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE', true)
 ```
 
 ## 模块
