@@ -1,198 +1,213 @@
 # 配置中心
 
-## 一、现状说明
+## 参考
 
-- **功能点规模**：总计 1088 个功能点  
-- **当前配置**：`configuration` / `configuration_v2` 为现有配置实现
+- 设计说明（背景、现状问题、方案要点、API、Conf_x/Handler_x、使用原则、同步接口）
+  - [钉钉文档 - 配置中心设计_V1](https://alidocs.dingtalk.com/i/nodes/dpYLaezmVNLNqyp6HagglmAl8rMqPxX6)（刘文沣 2024-12-24）
+- 云端接口：yapi - getSoftSettings/setSoftSettings
 
----
+## 特性
 
-## 二、目标与方向
+- **统一入口**：所有配置经 ConfigCenter 存取，一处 set、多处 get，避免改错、漏改和配置互相影响
+- **分层清晰**：`UNIVERSAL`（跨设备/多店共用）与 `LOCAL`（端配置）分离，为连锁多店扩展打基础
+- **模块化定义**：按模块注册 Conf_x + Handler_x，定义与消费成对，便于维护和云端同步
+- **命名规范**：`<模块>.<KEY>` 模式，与端/域/页面体系对齐，支持权限与功能点管理
 
-### 目标
+## 目标
 
-1. 将所有功能点进行分析整理，生成**功能点分析报告**
-2. 与目前配置对比，找出**差异点**
-3. 创建一套**定义**，囊括所有功能点并**兼容已有功能点**
-
-### 方向
-
-以产品 Excel/表格为切入点，以**实际产品功能为准**，按 **端、模块、页面** 重新理表：
-
-- 到**页面级别**；功能点级别走**权限控制**
-- 若存在更细颗粒度，再补充第四列维度一并考虑
+- 职责清晰。
+- 方便溯源。
+- 信息互通。
 
 ---
 
-## 三、功能点表格字段说明
+## 示例
 
-（与 AI 表格 / 产品表结构一致，用于分析、对比与配置键对齐。）
+命名规范 `<模块>.<KEY>`，仅 fullKey 一种写法：
+
+```javascript
+ConfigCenter.get('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE')
+ConfigCenter.set('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE', true)
+```
+
+## 模块
+
+- 系统配置 SYSTEM
+- 点餐 CHECKOUT
+- 结算 SETTLEMENT
+- 叫号 CALL
+- 接单 ACCEPT
+- 外卖 TAKEOUT
+- 排队 QUEUE
+- 订单 ORDER
+- 商品 GOOD
+- 菜单 MENU
+- 库存 INVENTORY
+- 桌台 TABLE
+- 报表 REPORT
+- 税 TAX
+- 会员 MEMBER
+- 设备 IOT
+- 支付 PAYMENT
+- 经营设置 SETTING
+- 语音 VOICE
+- 账号 ACCOUNT
+- 国际化 I18N
+
+## 功能清单
+
+> [全部功能清单AI表格，](https://alidocs.dingtalk.com/i/nodes/EpGBa2Lm8azoq94yCD3A96xlWgN7R35y?iframeQuery=entrance%3Ddata%26sheetId%3DhERWDMS%26viewId%3DqvGDAH2) 表格 ID：`EpGBa2Lm8azoq94yCD3A96xlWgN7R35y`
 
 
 | 字段     | 类型 | 说明                                                                                               |
 | -------- | ---- | -------------------------------------------------------------------------------------------------- |
 | 端       | 单选 | 台式、手持、自助、扫码点餐、Web后台、TV、TV登录、H5上传、管家App                                   |
 | 域       | 单选 | 点餐与收银、接单与叫号、会员与营销、商品与库存、经营与报表、设备与输出、门店与组织、系统配置、其他 |
-| 一级     | 文本 | 一级分类/页面（如：商品分类管理、营业概览、系统配置）                                              |
+| 一级     | 文本 | 一级分类/页面                                                                                      |
 | 二级     | 文本 | 二级分类/页面                                                                                      |
-| 三级     | 文本 | 三级/功能点（如：日期格式、支付方式列表）                                                          |
+| 三级     | 文本 | 三级/功能点                                                                                        |
 | 模块     | 单选 | 点餐、结算、叫号、接单、外卖、排队、订单、商品、菜单、库存、桌台、报表、税、国际化等               |
-| Key      | 文本 | 配置项 key（如 CALCULATOR_VERSION、FORMAT_DATE_TIME）                                              |
+| Key      | 文本 | 配置项 key                                                                                         |
 | 可选值   | 单选 | bool / enum / array / string / number / object                                                     |
 | 是否完成 | 单选 | 是 / 否 / 待定                                                                                     |
 | 备注     | 文本 | 说明或未使用等                                                                                     |
-| 负责人   | 人员 | 钉钉用户                                                                                           |
-
-
----
-
-## 四、命名与域划分
-
-### 顶层前缀
-
-
-| 前缀        | 含义       | 说明                              |
-| ----------- | ---------- | --------------------------------- |
-| `UNIVERSAL` | 跨设备配置 | 多端/多店共用（如：主题、国际化） |
-| `LOCAL`     | 端配置     | 与当前端/设备相关                 |
-
-
-### 域（辅助，用于理解与归属）
-
-
-| 域         | 编码 | 负责人 |
-| ---------- | ---- | ------ |
-| 点餐与收银 | R001 | 永杰   |
-| 接单与叫号 | R002 | 陈翔   |
-| 会员与营销 | R003 | 永杰   |
-| 商品与库存 | R004 | 云波   |
-| 经营与报表 | R005 | 焦龙   |
-| 设备与输出 | R006 | 老纪   |
-| 门店与组织 | R007 | 李准   |
-| 系统配置   | R008 | 永杰   |
-| 其他       | R009 | 永杰   |
-
-
-### 模块（主要，用于定义功能点，可映射到负责人）
-
-
-| 业务     | 模块常量   |
-| -------- | ---------- |
-| 点餐     | ORDER      |
-| 结算     | SETTLEMENT |
-| 叫号     | CALL       |
-| 接单     | ACCEPT     |
-| 外卖     | TAKEOUT    |
-| 排队     | QUEUE      |
-| 订单     | ORDER      |
-| 商品     | GOOD       |
-| 菜单     | MENU       |
-| 库存     | INVENTORY  |
-| 桌台     | TABLE      |
-| 报表     | REPORT     |
-| 税       | TAX        |
-| 会员     | MEMBER     |
-| 设备     | IOT        |
-| 支付     | PAYMENT    |
-| 经营设置 | SETTING    |
-| 语音     | VOICE      |
-| 账号     | ACCOUNT    |
-| 国际化   | I18N       |
-
-
-### 命名模式
-
-```
-<模块>.<KEY>
-```
-
-调用示例：
-
-```javascript
-// before
-ConfigCenter.get('cashier', 'PRODUCT_ITEM_AUTO_MERGE_ENABLE');
-
-// after
-ConfigCenter.get('POS.PRODUCT_ITEM_AUTO_MERGE_ENABLE');
-```
-
-（模块名与上表模块常量对应，如点餐场景用 `ORDER` 或项目内约定的 POS 等，以实际代码为准。）
+|          | 人员 | 钉钉用户                                                                                           |
 
 ---
 
-## 五、上一版设计参考（钉钉文档）
-
-> 来源：[钉钉文档 - 配置中心设计](https://alidocs.dingtalk.com/i/nodes/dpYLaezmVNLNqyp6HagglmAl8rMqPxX6)（刘文沣 2024-12-24）
-
-### 背景
-
-- 配置项随模块与本地化增多，多数**硬编码**散落业务代码，无中心化管理 → **改错、漏改、配置互相影响**
-- 当前设计偏向**单店单机**，对后续**连锁多店**支持不足
-
-### 现状与问题
-
-- **实现方式多样**：logic 文件、全局变量、max.cache 混用  
-  - logic：扩展性强，但分散、格式难统一  
-  - 全局变量：语义清晰，仅适合静态值  
-  - max.cache：可存复杂结构，但索引与管控弱
-- **问题归纳**：配置分散、定义与消费不成对、云端结构/接口/缓存不统一
-
-### 方案要点
-
-- 引入一层 **【配置中心】**：业务在约定目录下定义 **【模块配置】**（Conf_x），以**注册**方式挂到配置中心；配置中心负责**本地与云端同步**及读写、格式化等。
-- **配置集合关系**：  
-  1. 以模块为单位定义模块本地配置，所有模块本地配置的**累加** = 应用所需**配置全集**
-  2. 模块本地配置可**部分或全部**同步至门店云端
-  3. 可选存在**总部云端配置**，通过对门店云端合并/覆盖，再作用于本地
-
-### ConfigCenter API（上一版约定）
-
-
-| 方法                                   | 说明                       |
-| -------------------------------------- | -------------------------- |
-| `get(module, key)`                     | 查询配置项                 |
-| `set(module, key, value)`              | 设置配置项                 |
-| `parse(module, handlerId, rawConfig)`  | 云端原始数据解析为本地配置 |
-| `raw(module, handlerId, parsedConfig)` | 本地配置序列化为云端格式   |
-| `pull(module, handlerId)`              | 从云端拉取                 |
-| `push(module, handlerId, data)`        | 推送到云端                 |
-| `batchPull(params)`                    | 批量拉取                   |
-| `batchPush(params)`                    | 批量推送                   |
-
-
-### 模块配置定义 Conf_x
-
-- 定义配置项及**默认值**，key 全局唯一
-- 默认值需**完整**，值类型尽量为可枚举基础类型（string、number、boolean、string[] 等），避免深层 object
-- 命名规范：`<前缀>_<名词>_<状态词>`，如 `PRODUCT_ITEM_AUTO_MERGE_ENABLE`
-
-### 模块配置处理句柄 Handler_x
-
-- 用于与**云端配置同步**（pull/push），以及 parse/raw 的键与类型约定
-- 非必须：仅本地、不同步云端的模块只需 Conf_x，不需 Handler_x
-- 支持按 `settingKey` / `settingType` / `settingSubKey` 的标准同步，以及自定义 `pull`/`push` 方法
-
-### 使用原则（上一版）
-
-1. **定义顺序**：本地配置 → 门店云端配置 → 总部云端配置；先定义全量配置集合，再考虑同步
-2. **职责边界**：
-  - **配置中心**：应用级配置，一次初始化、全局使用、低频更新，仅在逻辑中通过 ConfigCenter 调用  
-  - **全局变量**：面向 UI，可直绑页面  
-  - **缓存/本地存储**：业务随存随取；配置中心底层可基于 max.cache
-3. **唯一入口**：所有配置从配置中心存取，一处 set、多处 get
-
-### 同步云端接口
-
-- 接口文档（待规范）：[yapi - getSoftSettings/setSoftSettings](https://yapi.sunmi.com/project/1578/interface/api/76802)
-
----
-
-## 六、本仓库文档与资源
-
-
-| 资源               | 说明                                                                        |
-| ------------------ | --------------------------------------------------------------------------- |
-| 功能点 AI 表格     | 表格 ID：`EpGBa2Lm8azoq94yCD3A96xlWgN7R35y`（端/域/模块/页面/Key/可选值等） |
-| `configuration_v2` | 当前 v2 实现目录（ConfigCenter、Conf_Universal/Conf_Local、Handler 等）     |
-
-
+| 功能键                                                | 自助 | Web后台 | 台式 | 手持 | 扫码点餐 | 管家App |
+| ----------------------------------------------------- | ---- | ------- | ---- | ---- | -------- | ------- |
+| SYS.APP_LOGO                                          | √    | √       | √    | √    | √        | √       |
+| SYS.APP_LOGO_DARK                                     | √    |         | √    | √    |          |         |
+| SYS.THEME                                             | √    |         | √    | √    |          |         |
+| SYS.DECIMAL_PLACES                                    |      | √       | √    |      |          |         |
+| SYS.EMAIL_REGEX                                       |      | √       |      |      |          |         |
+| SYS.LOCALE_LANGUAGE_MAP                               |      | √       | √    | √    | √        | √       |
+| SYS.CELLPHONE_VALIDATOR                               |      |         | √    | √    |          |         |
+| SYS.TELEPHONE_VALIDATOR                               |      |         | √    | √    |          |         |
+| SYS.MAX_AMOUNT_TIER_1                                 |      | √       | √    | √    |          | √       |
+| SYS.MAX_AMOUNT_TIER_2                                 |      | √       | √    |      |          |         |
+| SYS.MAX_AMOUNT_TIER_3                                 |      | √       |      |      |          | √       |
+| SYS.WATER_DROP_OFFSET                                 | √    |         |      | √    |          |         |
+| SYS.CALCULATOR_VERSION                                |      |         |      |      | √        |         |
+| SYS.CURRENT_LANGUAGE                                  |      |         |      |      | √        |         |
+| SYS.FUN_FEE                                           |      |         |      |      | √        |         |
+| SYS.FUN_GOOD_DISCOUNT                                 |      |         |      |      | √        |         |
+| SYS.FUN_SHARING_TABLE                                 |      |         |      |      | √        |         |
+| SYS.FUN_TAX                                           |      |         |      |      | √        |         |
+| SYS.FUN_ACTIVITIES                                    |      |         |      |      |          |         |
+| SYS.FUN_CALLING_SERVICE                               |      |         |      |      |          |         |
+| SYS.FUN_ONLINE_PAY                                    |      |         |      |      |          |         |
+| SYS.RANKING_TOP3_ICONS                                |      |         |      |      |          | √       |
+| SYS.TAB_BARS                                          |      |         |      |      |          | √       |
+| SYS.MAX_STOCK_AMOUNT                                  |      |         |      |      |          | √       |
+| SYS.MAX_STOCK_WEIGHT                                  |      |         |      |      |          | √       |
+| I18N.FORMAT_DATE                                      | √    | √       | √    | √    |          |         |
+| I18N.FORMAT_DATE_SHORT                                | √    | √       | √    | √    |          |         |
+| I18N.FORMAT_DATE_TIME                                 | √    | √       | √    | √    |          |         |
+| I18N.FORMAT_DATE_TIME_SHORT                           | √    | √       | √    | √    |          |         |
+| I18N.FORMAT_TIME                                      | √    | √       | √    | √    |          |         |
+| I18N.FORMAT_TIME_SHORT                                | √    | √       | √    | √    |          |         |
+| I18N.FORMAT_DATE_SHORT_TIME_SHORT                     | √    | √       | √    | √    |          |         |
+| STORE.STORE_AVATAR_BASE64                             | √    |         | √    | √    |          |         |
+| STORE.STORE_AVATAR                                    |      |         |      |      |          |         |
+| STORE.STORE_LOGIN_AD_IMG                              |      | √       | √    |      |          |         |
+| STORE.APP_NAME                                        |      |         | √    | √    |          |         |
+| STORE.APP_ONLINE_PAYMENT                              |      |         | √    | √    |          |         |
+| STORE.DEFAULT_BACKGROUND                              |      |         |      |      | √        |         |
+| STORE.STORE_BUSINESS_TYPE_REQUIRED                    |      |         |      |      |          |         |
+| STORE.STORE_CASCADE_ADDRESS_ENABLE                    |      |         |      |      |          |         |
+| STORE.STORE_CASCADE_ADDRESS_REQUIRED                  |      |         |      |      |          |         |
+| STORE.STORE_QR_ORDER_ENABLE                           |      |         |      |      |          |         |
+| STORE.STORE_QR_ORDER_AUTO_ACCEPT_ENABLE               |      |         |      |      |          |         |
+| STORE.STORE_SUBSCREEN_AD_IMG                          |      |         |      |      |          |         |
+| STORE.STORE_SUBSCREEN_PAY_AD_IMG                      |      |         |      |      |          |         |
+| STORE.D3MINI_SUBSCREEN_PAY_AD_IMG                     |      |         |      |      |          |         |
+| STORE.D_STORE_ORDER_AUTO_ACCEPT_ENABLE                |      |         |      |      |          |         |
+| STORE.D_STORE_QR_ORDER_ENABLE                         |      |         |      |      |          |         |
+| CHECKOUT.AD_SELF_DINING_METHOD                        | √    |         |      |      |          |         |
+| CHECKOUT.AD_SELF_PAYMENT_METHOD                       | √    |         |      |      |          |         |
+| CHECKOUT.AD_SELF_PLAY_SWITCH                          | √    |         |      |      |          |         |
+| CHECKOUT.AD_SELF_PLAY_TYPE                            | √    |         |      |      |          |         |
+| CHECKOUT.AD_SELF_SECONDARY                            | √    |         |      |      |          |         |
+| CHECKOUT.BUSINESS_TYPE                                | √    | √       | √    | √    |          |         |
+| CHECKOUT.UI_CATEGORY_COUNT_SHOW                       | √    |         |      |      |          |         |
+| CHECKOUT.UI_LAYOUT_TYPE                               | √    |         | √    | √    |          |         |
+| CHECKOUT.POS_QR_ORDER_ENABLE                          |      |         | √    | √    |          |         |
+| CHECKOUT.POS_QR_ORDER_AUTO_ACCEPT_ENABLE              |      |         | √    | √    |          |         |
+| CHECKOUT.POS_SCAN_ORDER_ENABLE                        |      |         |      |      |          |         |
+| CHECKOUT.POS_MENU_MONEY_REGULAR                       |      |         |      |      |          |         |
+| CHECKOUT.CUSTOM_PRICE_SUPPORT                         |      |         |      |      |          |         |
+| CHECKOUT.TEMPORARY_GOODS_SUPPORT                      |      |         |      |      |          |         |
+| CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE               |      |         |      |      |          |         |
+| CHECKOUT.LOW_INVENTORY_WARNING_ENABLE                 |      |         |      |      |          |         |
+| CHECKOUT.SPLIT_ORDER_ENABLE                           |      |         | √    | √    |          |         |
+| CHECKOUT.SETTLEMENT_AUTO_PRINT_BILL_TICKET_ENABLE     |      |         |      |      |          |         |
+| CHECKOUT.SETTLEMENT_CASH_AMOUNT_COVERAGE_ENABLE       |      |         |      |      |          |         |
+| CHECKOUT.SETTLEMENT_MANUAL_PRINT_MAKING_TICKET_ENABLE |      |         |      |      |          |         |
+| CHECKOUT.SETTLEMENT_SPLIT_PAY_ENABLE                  |      |         |      |      |          |         |
+| CHECKOUT.SECONDARY_SCREEN_AD_ENABLE                   |      |         |      |      |          |         |
+| CHECKOUT.DELIVERY_CHANNEL_MONEY_REGULAR               |      |         |      |      |          |         |
+| CHECKOUT.PRE_PRINT_NO_REFUND_CAT_ENABLE               |      |         |      |      |          |         |
+| GOOD.ITEM_BG_MAP                                      | √    |         | √    |      |          |         |
+| GOOD.ITEM_COLOR_MAP                                   |      |         | √    |      |          |         |
+| GOOD.ITEM_SHAPE_MAP                                   |      |         | √    |      |          |         |
+| GOOD.MAX_AMOUNT_TIER_1                                |      | √       | √    |      |          |         |
+| GOOD.MAX_AMOUNT_TIER_2                                |      | √       | √    |      |          |         |
+| GOOD.MAX_AMOUNT_TIER_3                                |      | √       |      |      |          |         |
+| GOOD.EXTERNAL_CHANNEL_MENU_ENABLE                     |      |         |      |      |          |         |
+| IOT.LABEL_PRINTER_PAPER_SIZE                          |      |         | √    | √    |          |         |
+| IOT.SUPPORT_PRINTER_MODEL                             |      |         | √    | √    |          |         |
+| MEMBER.MEMBER_ENABLE                                  | √    |         | √    | √    |          |         |
+| MEMBER.MEMBER_PHONE_PREFIX                            | √    |         |      |      |          |         |
+| MEMBER.MEMBER_DEPOSIT_OFFLINE_SUPPORT                 |      |         |      |      |          |         |
+| MEMBER.MEMBER_DEPOSIT_SUPPORT                         |      |         |      |      |          |         |
+| MEMBER.MEMBER_PROMOTION_SUPPORT                       |      |         |      |      |          |         |
+| PAYMENT.ECR_PAY_MERCHANT_ID                           | √    |         |      |      |          |         |
+| PAYMENT.PAY_METHOD_RANDOM_ICON                        |      |         |      |      |          |         |
+| PAYMENT.ONLINEPAYMETHOD_NAMES                         | √    |         |      |      |          |         |
+| PAYMENT.ONLINEPAY_ICON_MAP                            | √    |         |      |      |          |         |
+| PAYMENT.ONLINE_PAYMENT_TYPE                           |      |         | √    |      |          |         |
+| PAYMENT.PAY_ECR_CONFIG                                | √    |         |      |      |          |         |
+| PAYMENT.PAY_ECR_CONFIG_IP                             | √    |         |      |      |          |         |
+| PAYMENT.PAY_ECR_CONFIG_PORT                           | √    |         |      |      |          |         |
+| PAYMENT.PAY_METHOD_LIST                               | √    |         | √    | √    |          |         |
+| PAYMENT.ROUNDING_PARAM_CONFIG                         | √    |         |      |      |          |         |
+| PAYMENT.ROUNDING_RULES                                | √    | √       | √    | √    |          |         |
+| PAYMENT.ROUNDING_RULE_DESC                            | √    | √       | √    | √    |          |         |
+| PAYMENT.RoundingRuleType                              | √    | √       | √    | √    |          |         |
+| PAYMENT.TIP_ENABLE                                    |      |         | √    | √    |          |         |
+| PAYMENT.TIP_SHORTCUT_INFO                             |      |         | √    | √    |          |         |
+| PICKUP.MAX_SERIAL_NUMBER                              |      |         | √    | √    |          |         |
+| PICKUP.MIN_SERIAL_NUMBER                              |      |         | √    | √    |          |         |
+| PICKUP.PICKUP_ENABLE                                  |      |         |      |      |          |         |
+| TAKEOUT.TAKEOUT_ENABLE                                |      | √       | √    | √    |          | √       |
+| TAKEOUT.AUTO_MEALDELIVERY_ENABLE                      |      |         |      |      |          |         |
+| QUEUE.QUEUE_ENABLE                                    |      |         |      |      |          |         |
+| QUEUE.QUEUE_TABLE_LIST                                |      |         |      |      |          |         |
+| CALL.NUMBER_CALLING_ORDERCHANNELS                     |      |         |      |      |          |         |
+| TAX.TAXATION_MODE                                     | √    |         | √    | √    | √        |         |
+| TAX.FEE_LIST                                          |      |         | √    |      |          |         |
+| TAX.MENU_FEE_LIST                                     |      |         | √    | √    |          |         |
+| TAX.MENU_TAX_LIST                                     |      |         | √    | √    |          |         |
+| TAX.CURRENT_LANGUAGE                                  |      |         |      |      | √        |         |
+| TAX.TAXATION_MODE                                     | √    |         | √    | √    | √        |         |
+| TAX.TAX_TAG                                           |      |         | √    | √    |          |         |
+| TAX.TAX_ENABLE                                        |      |         |      |      |          |         |
+| TAX.TAX_LIST                                          |      |         |      |      |          |         |
+| TAX.PRODUCT_PRICE_INCLUDE_TAX_ENABLE                  |      |         |      |      |          |         |
+| VOICE.AIVOICE_DEFAULT_LANG                            | √    |         | √    | √    |          |         |
+| VOICE.AIVOICE_DEFAULT_LANG_EFFECT_AUTOLY              | √    |         | √    | √    |          |         |
+| VOICE.CHANNEL_SCAN_ORDER_ENABLE                       | √    |         |      |      |          |         |
+| VOICE.CUSTOM_VOICE_ASSETS                             | √    |         | √    | √    |          |         |
+| VOICE.KIOSK_ORDER_ENABLE                              |      |         | √    |      |          |         |
+| VOICE.REMEDY_VOICE_ASSETS                             | √    |         | √    | √    |          |         |
+| VOICE.SCAN_ORDER_BEEP_ENABLE                          | √    |         | √    | √    |          |         |
+| VOICE.SCAN_ORDER_ENABLE                               | √    |         | √    | √    |          |         |
+| VOICE.SCAN_ORDER_TEXT_ENABLE                          | √    |         | √    | √    |          |         |
+| VOICE.SCAN_PAYMENT_BEEP_ENABLE                        | √    |         |      |      |          |         |
+| VOICE.SCAN_PAYMENT_ENABLE                             | √    |         | √    | √    |          |         |
+| VOICE.SCAN_PAYMENT_TEXT_ENABLE                        | √    |         |      |      |          |         |
+| VOICE.TACKOUT_ORDER_BEEP_ENABLE                       | √    |         |      |      |          |         |
+| VOICE.TACKOUT_ORDER_ENABLE                            | √    |         | √    | √    |          |         |
+| VOICE.TACKOUT_ORDER_TEXT_ENABLE                       | √    |         |      |      |          |         |

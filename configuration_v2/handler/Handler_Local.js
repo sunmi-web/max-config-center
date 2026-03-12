@@ -1,51 +1,21 @@
 /**
- * Handler for Cashier module 收银台模块配置处理函数
- * 
- * Name rules 命名规范: 与Conf_xx的配置项key对应
+ * Handler for Local config 本地配置云端同步处理
+ * 键与 Conf_Local 的 fullKey 一致（含模块前缀），仅保留 Conf_Local 中存在的同步项
  */
 function Handler_Local() {
     class Handler {
         constructor() { }
 
-        /**
-         * 收银台布局尺寸
-         * {
-         *   "settingKey": "CHECKSTAND_LAYOUT_TYPE_HANDLE",
-         *   "settingType": "CONTENT",
-         *   "settingVal": 'GRAPH' // GRAPH（卡片）LIST（列表）
-         * }
-         */
-        UI_LAYOUT_TYPE = {
+        // ----- CHECKOUT -----
+        "CHECKOUT.UI_LAYOUT_TYPE" = {
             settingKey: "CHECKSTAND_LAYOUT_TYPE_HANDLE",
             settingType: "CONTENT",
         };
-        // /**
-        //  * 桌台选择视图
-        //  */
-        // UI_DINING_LAYOUT_TYPE = {
-        //     settingKey: 'DINING_LAYOUT',
-        //     settingType: 'CONTENT'
-        // };
-        /**
-         * 商品卡片样式
-         * {
-         *   "settingKey": "PRODUCT_CARD_SHOW",
-         *   "settingType": "CONTENT",
-         *   "settingVal": {
-         *      "NAME_SHOW": "open",
-         *      "PRICE_SHOW": "open",
-         *      "PICTURE_SHOW": "open",
-         *      "CODE_SHOW": "open",
-         *      "COUNT_SHOW": "open",
-         *      "PACKAGE_SHOW": "open",
-         *   }
-         * }
-         */
-        UI_PRODUCT_CARD = {
+
+        "CHECKOUT.UI_PRODUCT_CARD" = {
             settingKey: "PRODUCT_CARD_SHOW",
             settingType: "CONTENT",
             settingSubKey: {
-                // cloud key -> local key (defined in Conf_xx file)
                 NAME_SHOW: "UI_PRODUCT_CARD_NAME_SHOW",
                 PRICE_SHOW: "UI_PRODUCT_CARD_PRICE_SHOW",
                 PICTURE_SHOW: "UI_PRODUCT_CARD_PICTURE_SHOW",
@@ -54,88 +24,108 @@ function Handler_Local() {
                 PACKAGE_SHOW: "UI_PRODUCT_CARD_PACKAGE_SHOW",
             },
         };
-        /**
-         * 营业模式（正快餐设置）
-         * {
-         *   "settingKey": "STORE_BUSINESS_TYPE_HANDLE",
-         *   "settingType": "CONTENT",
-         *   "settingVal": 'ALL' // SETTLE_FIRST(先结账后用餐) | ORDER_FIRST(先用餐后结账) | ALL(全部)
-         * }
-         */
-        BUSINESS_TYPE = {
+
+        "CHECKOUT.BUSINESS_TYPE" = {
             settingKey: "STORE_BUSINESS_TYPE_HANDLE",
             settingType: "CONTENT",
         };
-        /**
-         * 是否菜品自动合并
-         * {
-         *   "settingKey": "PRODUCT_MERGE",
-         *   "settingType": "SWITCH",
-         *   "settingVal": 'close' // close（禁用）open（启用）
-         * }
-         */
-        PRODUCT_ITEM_AUTO_MERGE_ENABLE = {
+
+        "CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE" = {
             settingKey: "PRODUCT_MERGE",
             settingType: "SWITCH",
         };
-        /**
-         * 是否启用拆分支付
-         */
-        SETTLEMENT_SPLIT_ORDER_ENABLE = {
+
+        "CHECKOUT.SETTLEMENT_SPLIT_ORDER_ENABLE" = {
             settingKey: "SPLIT_ORDER_SETTLEMENT",
             settingType: "SWITCH",
         };
-        /**
-         * 是否结账后默认打印结账单
-         */
-        SETTLEMENT_AUTO_PRINT_BILL_TICKET_ENABLE = {
+
+        "CHECKOUT.SETTLEMENT_AUTO_PRINT_BILL_TICKET_ENABLE" = {
             settingKey: "AUTO_PRINT_SETTLEMENT_TICKET",
             settingType: "SWITCH",
         };
-        /**
-         * 是否快餐手动打印制作单
-         */
-        SETTLEMENT_MANUAL_PRINT_MAKING_TICKET_ENABLE = {
+
+        "CHECKOUT.SETTLEMENT_MANUAL_PRINT_MAKING_TICKET_ENABLE" = {
             settingKey: "MANUAL_PRINT_MAKING_TICKET",
             settingType: "SWITCH",
         };
-        /**
-         * 是否现金支付默认回填输入框
-         */
-        SETTLEMENT_CASH_AUTO_FILL_ENABLE = {
+
+        "CHECKOUT.SETTLEMENT_CASH_AUTO_FILL_ENABLE" = {
             settingKey: "CASH_BACHFILL_INPUTBOX",
             settingType: "SWITCH",
         };
-        /**
-         * 是否现金常用支付金额覆盖模式
-         */
-        SETTLEMENT_CASH_AMOUNT_COVERAGE_ENABLE = {
+
+        "CHECKOUT.SETTLEMENT_CASH_AMOUNT_COVERAGE_ENABLE" = {
             settingKey: "CASH_AMOUNT_COVERAGE",
             settingType: "SWITCH",
         };
-        // enable POS qr order 是否启用POS扫码点餐
-        POS_QR_ORDER_ENABLE = {
+
+        "CHECKOUT.POS_QR_ORDER_ENABLE" = {
             settingKey: "TABLE_QR_CODE_TO_ORDER",
             settingType: "SWITCH",
         };
-        // enable POS qr order auto accept 是否启用POS扫码点餐自动接单
-        POS_QR_ORDER_AUTO_ACCEPT_ENABLE = {
+
+        "CHECKOUT.POS_QR_ORDER_AUTO_ACCEPT_ENABLE" = {
             settingKey: "TABLE_AUTO_ACCEPT_ORDER",
             settingType: "SWITCH",
         };
-        // 低库存预警
-        LOW_INVENTORY_WARNING_ENABLE = {
+
+        "CHECKOUT.LOW_INVENTORY_WARNING_ENABLE" = {
             settingKey: "INV_WARNING",
             settingType: "SWITCH",
         };
 
-        // whether enable POS scan to order 是否启用POS扫码点餐 (注意不是外部渠道扫码点餐!)
-        POS_SCAN_ORDER_ENABLE = {
+        "CHECKOUT.POS_SCAN_ORDER_ENABLE" = {
             settingKey: "STORE_SCAN_SWITCH",
             settingType: "SWITCH",
         };
 
-        UI_COMMODITY_CLASSIFICATION = {
+        "CHECKOUT.COMMODITY_CLASSIFICATION" = {
+            settingKey: "COMMODITY_CLASSIFICATION",
+            settingType: "CONTENT",
+            settingSubKey: {
+                NAME_SHOW: "UI_CATEGORY_NAME_SHOW",
+                PICTURE_SHOW: "UI_CATEGORY_PICTURE_SHOW",
+                COUNT_SHOW: "UI_CATEGORY_COUNT_SHOW",
+            },
+        };
+
+        "CHECKOUT.AD_SELF_SECONDARY" = {
+            settingKey: "AD_SELF_SECONDARY",
+            settingType: "CONTENT",
+        };
+
+        "CHECKOUT.AD_SELF_PLAY_TYPE" = {
+            settingKey: "AD_SELF_PLAY_TYPE",
+            settingType: "CONTENT",
+        };
+
+        "CHECKOUT.AD_SELF_PLAY_SWITCH" = {
+            settingKey: "AD_SELF_PLAY_SWITCH",
+            settingType: "CONTENT",
+        };
+
+        "CHECKOUT.AD_SELF_DINING_METHOD" = {
+            settingKey: "AD_SELF_DINING_METHOD",
+            settingType: "CONTENT",
+        };
+
+        "CHECKOUT.AD_SELF_PAYMENT_METHOD" = {
+            settingKey: "AD_SELF_PAYMENT_METHOD",
+            settingType: "CONTENT",
+        };
+
+        "CHECKOUT.AD_SELF_DELIVERED_METHOD" = {
+            settingKey: "AD_SELF_DELIVERED_METHOD",
+            settingType: "CONTENT",
+        };
+
+        "CHECKOUT.AD_SELF_CHECKSTAND_LAYOUT_TYPE" = {
+            settingKey: "AD_SELF_CHECKSTAND_LAYOUT_TYPE",
+            settingType: "CONTENT",
+        };
+
+        "CHECKOUT.UI_COMMODITY_CLASSIFICATION" = {
             settingKey: "COMMODITY_CLASSIFICATION",
             settingType: "CONTENT",
             settingSubKey: {
@@ -145,7 +135,141 @@ function Handler_Local() {
             },
         }
 
+        // ----- MEMBER -----
+        "MEMBER.MEMBER_ENABLE" = {
+            settingKey: "MEMBER_ABILITY",
+            settingType: "SWITCH",
+        };
 
+        // ----- PAYMENT -----
+        "PAYMENT.PAY_METHOD_LIST" = {
+            pull: async () => {
+                const res = await max.serviceCall(
+                    "mobileGetPayMethodList",
+                    { body: {} },
+                    { env: max.envVar.getValue("SUNMI_ENV") },
+                    true
+                );
+                const { data, success } = res.body;
+                if (success) return { PAY_METHOD_LIST: data };
+            },
+        };
+
+        "PAYMENT.PAY_ECR_CONFIG" = {
+            settingKey: "PAY_ECR_CONFIG",
+            settingType: "CONTENT",
+        };
+
+        // ----- TAX -----
+        "TAX.TAX_LIST" = {
+            pull: async () => {
+                const res = await max.serviceCall(
+                    "listStoreTaxItemsByMgt",
+                    { body: {} },
+                    { env: max.envVar.getValue("SUNMI_ENV") },
+                    true
+                );
+                const { data, success } = res.body;
+                if (success) return { TAX_LIST: data };
+            },
+        };
+
+        "TAX.FEE_LIST" = {
+            pull: async () => {
+                const res = await max.serviceCall(
+                    "listFeeItem",
+                    { body: {} },
+                    { env: max.envVar.getValue("SUNMI_ENV") },
+                    true
+                );
+                const { data, success } = res.body;
+                if (success) return { FEE_LIST: data?.list || [] };
+            },
+        };
+
+        "TAX.PRODUCT_PRICE_INCLUDE_TAX_ENABLE" = {
+            settingKey: "PRODUCT_VAT",
+            settingType: "SWITCH",
+            push: async (data) => {
+                const res = await max.serviceCall(
+                    "setProductVatSetting",
+                    {
+                        body: {
+                            status: data.PRODUCT_PRICE_INCLUDE_TAX_ENABLE ? "open" : "close",
+                        },
+                    },
+                    { env: max.envVar.getValue("SUNMI_ENV") },
+                    true
+                );
+                return res.body;
+            },
+        };
+
+        "TAX.TAXATION_MODE" = {
+            settingKey: "TAXATION_MODE",
+            settingType: "CONTENT",
+        };
+
+        // ----- VOICE -----
+        "VOICE.SCAN_PAYMENT_ENABLE" = {
+            settingKey: "SCAN_PAYMENT",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.SCAN_PAYMENT_BEEP_ENABLE" = {
+            settingKey: "SCAN_PAYMENT_BEEP",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.SCAN_PAYMENT_TEXT_ENABLE" = {
+            settingKey: "SCAN_PAYMENT_VOICE",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.TACKOUT_ORDER_ENABLE" = {
+            settingKey: "TACKOUT_ORDER",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.TACKOUT_ORDER_BEEP_ENABLE" = {
+            settingKey: "TACKOUT_ORDER_BEEP",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.TACKOUT_ORDER_TEXT_ENABLE" = {
+            settingKey: "TACKOUT_ORDER_VOICE",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.SCAN_ORDER_ENABLE" = {
+            settingKey: "SCAN_ORDER",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.SCAN_ORDER_BEEP_ENABLE" = {
+            settingKey: "SCAN_ORDER_BEEP",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.SCAN_ORDER_TEXT_ENABLE" = {
+            settingKey: "SCAN_ORDER_VOICE",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.CHANNEL_SCAN_ORDER_ENABLE" = {
+            settingKey: "CHANNEL_SCAN_ORDER",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.CHANNEL_SCAN_ORDER_BEEP_ENABLE" = {
+            settingKey: "CHANNEL_SCAN_ORDER_BEEP",
+            settingType: "SWITCH",
+        };
+
+        "VOICE.CHANNEL_SCAN_ORDER_TEXT_ENABLE" = {
+            settingKey: "CHANNEL_SCAN_ORDER_VOICE",
+            settingType: "SWITCH",
+        };
     }
 
     return new Handler();

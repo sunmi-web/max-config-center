@@ -1,41 +1,37 @@
+/**
+ * Config for Universal (Cloud, Cross-device) Modules 通用（云端、跨端）模块配置
+ * 
+ * Name rules 命名规范:
+ * 例如 `<二级域>.<前缀>_<名词>_<状态词>`
+ * 
+ * 支持模块列表（Module List）:
+ * - 系统配置 SYSTEM (SYS)
+ * - 点餐 CHECKOUT (POS)
+ * - 结算 SETTLEMENT
+ * - 叫号 CALL
+ * - 接单 ACCEPT
+ * - 外卖 TAKEOUT
+ * - 排队 QUEUE
+ * - 订单 ORDER
+ * - 商品 GOOD
+ * - 菜单 MENU
+ * - 库存 INVENTORY
+ * - 桌台 TABLE
+ * - 报表 REPORT
+ * - 税 TAX
+ * - 会员 MEMBER
+ * - 设备 IOT
+ * - 支付 PAYMENT
+ * - 经营设置 SETTING
+ * - 语音 VOICE
+ * - 账号 ACCOUNT
+ * - 国际化 I18N
+ */
 function Conf_Universal() {
-    /**
-     * Config for Cashier module 收银台模块配置 
-     *
-     * Name rules 命名规范: 
-     * eg `<二级域>.<前缀>_<名词>_<状态词>`
-     */
-
-    // 系统配置 SYS
-    // 点餐 POS
-    // 结算 SETTLEMENT
-    // 叫号 CALL
-    // 接单 ACCEPT
-    // 外卖 TAKEOUT
-    // 排队 QUEUE
-    // 订单 ORDER
-    // 商品 GOOD
-    // 菜单 MENU
-    // 库存 INVENTORY
-    // 桌台 TABLE
-    // 报表 REPORT
-    // 税 TAX
-    // 会员 MEMBER
-    // 设备 IOT
-    // 支付 PAYMENT
-    // 经营设置 SETTING
-    // 语音 VOICE
-    // 账号 ACCOUNT
-    // 国际化 I18N
-
     return {
-        "SYS.APP_LOGO": 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-        "SYS.APP_LOGO_DARK": 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-        "SYS.APP_NAME": 'App Name',
-        "SYS.LOGIN_AD_IMG": max.envVar.getValue('SYS_LOGIN_AD_IMG'),
-        "SYS.SUBSCREEN_AD_IMG": max.envVar.getValue('SYS_SUBSCREEN_AD_IMG'),
-        "SYS.SUBSCREEN_PAY_AD_IMG": max.envVar.getValue('SYS_SUBSCREEN_PAY_AD_IMG'),
-        "SYS.SUBSCREEN_PAY_AD_IMG_MINI": max.envVar.getValue('SYS_SUBSCREEN_PAY_AD_IMG_MINI'),
+        // "SYS.APP_NAME": 'App Name',
+        // "SYS.APP_LOGO": 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+        // "SYS.APP_LOGO_DARK": 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
 
         // theme 主题
         "SYS.THEME": max.envVar.getValue('SYS_THEME') || {
