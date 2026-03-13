@@ -26,6 +26,7 @@ ConfigCenter.enable(['TAKEOUT', 'QUEUE']); // 批量开启
 ConfigCenter.disable('TAKEOUT');
 ConfigCenter.disable(['TAKEOUT', 'QUEUE']); // 批量关闭
 
+// DONE
 ConfigCenter.set('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE', true); // 设置配置项
 ConfigCenter.get('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE'); // 获取配置项
 ConfigCenter.pull('CHECKOUT.PRODUCT_ITEM_AUTO_MERGE_ENABLE'); // 从云端拉取配置项
