@@ -20,7 +20,7 @@
 命名规范 `<模块>.<KEY>`，仅 fullKey 一种写法：
 
 ```javascript
-// TODO:模块开关，影响模块关联的所有页面，模块与页面关联，参考下方功能清单
+// TODO: 模块开关，影响模块关联的所有页面，模块与页面关联，参考下方功能清单
 ConfigCenter.enable('TAX');
 ConfigCenter.enable(['TAKEOUT', 'QUEUE']); // 批量开启
 ConfigCenter.disable('TAKEOUT');
